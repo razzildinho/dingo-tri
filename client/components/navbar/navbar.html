@@ -1,0 +1,36 @@
+<div class="navbar navbar-inverse navbar-static-top" ng-controller="NavbarCtrl">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a ui-sref="main" class="navbar-brand">logo</a>
+    </div>
+    <div class="navbar-collapse collapse" id="main-navbar">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in menu" ui-sref-active="active" ui-sref="{{item.link}}">
+            <a href="javascript:void(0)">{{item.title}}</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" ng-if="!isLoggedIn">
+        <li ui-sref-active="active" ui-sref="login">
+            <a href="javascript:void(0)">Log in</a>
+        </li>
+        <li ui-sref-active="active" ui-sref="signup">
+            <a href="javascript:void(0)">Register</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" ng-if="isLoggedIn">
+        <li ui-sref-active="active" ui-sref="settings">
+            <a href="javascript:void(0)">Settings</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" ng-click="logout()"><i class="fa fa-sign-out"></i>&nbsp;Log out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

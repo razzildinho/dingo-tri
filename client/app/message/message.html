@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form role="form" name="messageForm" ng-submit="post()">
+            <div class="form-group">
+              <label class="control-label">
+                New message
+              </label>
+              <textarea ng-model="newMessage" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" ng-disabled="!newMessage"><i class="fa fa-paper-plane"></i>&nbsp;Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="panel panel-default" ng-repeat="message in messages track by $index">
+        <div class="panel-body">
+          <h5 ng-class="message._athlete._id == athlete ? 'text-primary' : ''">
+            {{message._athlete.name || '&nbsp;'}}
+          </h5>
+          {{message.message}}
+          <hr>
+          <div class="text-muted text-right">
+            <button class="pull-left btn btn-danger" ng-if="isAdmin" ng-click="delete(message._id)"><i class="fa fa-times"></i>&nbsp;Delete</button>
+            {{message.date | date:'HH:mm d MMM yyyy'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
