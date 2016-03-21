@@ -29,7 +29,7 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'tri-secret'
+    session: '7820y8n39veY7j5xd0j4tiwZ99g08Wq3'
   },
 
   // List of user roles

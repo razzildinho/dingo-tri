@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
     if (!athlete) return res.status(404).json({message: 'Something went wrong, please try again.'});
     if (!athlete.active) return res.status(401).json({message: 'Your account has not been activated. Contact a site administrator to be activated.'});
 
-    var token = auth.signToken(athlete._id, athlete.role);
+    var token = auth.signToken(athlete._id, athlete.name);
     res.json({token: token});
   })(req, res, next)
 });
