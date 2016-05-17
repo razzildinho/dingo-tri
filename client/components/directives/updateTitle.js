@@ -9,7 +9,7 @@
             link: function(scope, element) {
 
                 var listener = function(event, toState, toParams, fromState, fromParams) {
-                    var title = 'WM tri club';
+                    var title = 'Dingo Tri Club';
                     if (toState.data && toState.data.title){
                         title += (' - ' + toState.data.title);
                     }
