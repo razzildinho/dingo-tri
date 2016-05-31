@@ -14,7 +14,7 @@ var Athlete = require('./api/athlete/athlete.model');
 var email = process.argv[2];
 var password = process.argv[3];
 
-if (email.indexOf('@') < 1 || email.indexOf('.') <= email.indexOf('@') + 1){
+if (email.indexOf('@') < 1){
     console.log('Invalid email');
     process.exit(-1);
 }
