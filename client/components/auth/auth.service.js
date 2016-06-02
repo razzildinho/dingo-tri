@@ -156,7 +156,7 @@
             },
 
             isAthlete: function() {
-                return currentAthlete.role === 'admin' || currentAthlete.role === 'athlete';
+                return currentAthlete.role === 'admin' || currentAthlete.role === 'user';
             },
 
             /**

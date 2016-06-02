@@ -14,6 +14,7 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
       <!-- endbower -->
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
@@ -63,6 +64,9 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
+      <script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
+      <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -89,6 +93,7 @@
           <script src="app/training/training.service.js"></script>
           <script src="components/auth/athlete.service.js"></script>
           <script src="components/auth/auth.service.js"></script>
+          <script src="components/directives/dateTimePicker.js"></script>
           <script src="components/directives/placesSearch.js"></script>
           <script src="components/directives/updateTitle.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>

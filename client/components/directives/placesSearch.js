@@ -27,9 +27,11 @@
                     bounds: bounds
                 });
                 google.maps.event.addListener(searchBox, 'place_changed', function(){
-                    ngModelCtrl.$setViewValue(searchBox.getPlace());
-                    ngModelCtrl.$setValidity('fromGoogle', true);
-                    $rootScope.$digest();
+                    if ('geometry' in searchBox.getPlace()){
+                        ngModelCtrl.$setViewValue(searchBox.getPlace());
+                        ngModelCtrl.$setValidity('fromGoogle', true);
+                        $rootScope.$digest();
+                    }
                 });
 
                 $scope.place = null;
@@ -37,6 +39,7 @@
                 $scope.$watch('place', function(place){
                     ngModelCtrl.$setViewValue(place);
                     if (firstRun){
+                        ngModelCtrl.$setPristine();
                         firstRun = false;
                         return;
                     }

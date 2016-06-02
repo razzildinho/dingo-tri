@@ -1,47 +1,68 @@
 <div class="container">
   <div class="row">
+    <h2>{{sessions.length > 0 ? 'Upcoming sessions' : 'No upcoming sessions'}}</h2>
     <div class="col-md-12">
+      <div ng-repeat="upcoming in sessions" class="panel panel-default">
+        <div class="panel-heading"><h3><i class="fi" ng-class="'flaticon-'+upcoming.discipline"></i>&nbsp;<span style="text-transform:capitalize;">{{upcoming.discipline}}</span></h3></div>
+        <div class="panel-body">
+          <p><i class="fa fa-calendar"></i>&nbsp;{{upcoming.time | date : 'dd/MM/yyyy HH:mm'}}</p>
+          <p><a href="{{upcoming.location.url}}" target="_blank"><i class="fa fa-map-marker"></i>&nbsp;{{upcoming.location.formatted_address}}</a></p>
+          <p ng-if="upcoming.description">{{upcoming.description}}</p>
+        </div>
+        <div ng-if="isAdmin" class="panel-footer">
+          <button class="btn btn-danger" ng-click="deleteSession(upcoming)">Delete</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row" ng-if="isAthlete">
     <div class="col-xs-12">
-      <div class="panel panel-default">
+      <button class="btn btn-default" ng-click="showForm=true" ng-show="!showForm">Add session</button>
+      <div ng-show="showForm" class="panel panel-default">
         <div class="panel-body">
           <h2>Add session</h2>
           <form ng-submit="addActivity()" name="newSession" novalidate>
             <div class="form-group">
               <div class="btn-group">
-                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'swim' ? 'btn-primary active' : 'btn-default'">
-                  <input ng-model="discipline" value="swim" type="radio"><i class="fi flaticon-swim"></i>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="session.discipline == 'swim' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="session.discipline" value="swim" type="radio"><i class="fi flaticon-swim"></i>
                 </label>
-                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'bike' ? 'btn-primary active' : 'btn-default'">
-                  <input ng-model="discipline" value="bike" type="radio"><i class="fi flaticon-bike"></i>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="session.discipline == 'bike' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="session.discipline" value="bike" type="radio"><i class="fi flaticon-bike"></i>
                 </label>
-                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'run' ? 'btn-primary active' : 'btn-default'">
-                  <input ng-model="discipline" value="run" type="radio"><i class="fi flaticon-run"></i>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="session.discipline == 'run' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="session.discipline" value="run" type="radio"><i class="fi flaticon-run"></i>
                 </label>
-                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'gym' ? 'btn-primary active' : 'btn-default'">
-                  <input ng-model="discipline" value="gym" type="radio"><i class="fi flaticon-gym"></i>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="session.discipline == 'gym' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="session.discipline" value="gym" type="radio"><i class="fi flaticon-gym"></i>
                 </label>
               </div>
               <div class="btn-group">
-                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'coffee' ? 'btn-primary active' : 'btn-default'">
-                  <input ng-model="discipline" value="coffee" type="radio"><i class="fi flaticon-coffee"></i>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="session.discipline == 'coffee' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="session.discipline" value="coffee" type="radio"><i class="fi flaticon-coffee"></i>
                 </label>
-                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'beer' ? 'btn-primary active' : 'btn-default'">
-                  <input ng-model="discipline" value="beer" type="radio"><i class="fi flaticon-beer"></i>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="session.discipline == 'beer' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="session.discipline" value="beer" type="radio"><i class="fi flaticon-beer"></i>
                 </label>
               </div>
             </div>
+            <hr>
+            <div class="form-group" ng-class="(newSession.time.$invalid && newSession.time.$dirty) ? 'has-error' : ''">
+              <label class="control-label">Date/Time</label>
+              <div name="time" ng-model="session.time" required="true" date-time-picker></div>
+            </div>
             <div class="form-group" ng-class="(newSession.address.$invalid && newSession.address.$dirty) ? 'has-error' : ''">
               <label class="control-label">Location</label>
-              <div name="address" ng-model="location" places-search></div>
+              <div name="address" ng-model="session.location" required="true" places-search></div>
               <span ng-show="newSession.address.$invalid && newSession.address.$dirty" class="help-block">Please select address from dropdown</span>
             </div>
             <div class="form-group">
               <label class="control-label">Description</label>
-              <textarea ng-model="description" class="form-control" rows="3"></textarea>
+              <textarea ng-model="session.description" class="form-control" rows="3"></textarea>
             </div>
+            <div>
+              <button ng-click="showForm=false"type="button" class="btn btn-default">Cancel</button>
+              <button ng-disabled="newSession.$invalid" type="submit" class="btn btn-primary">Add session</button>
           </form>
         </div>
       </div>

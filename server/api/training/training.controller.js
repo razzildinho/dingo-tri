@@ -10,6 +10,15 @@ exports.index = function(req, res) {
     return res.status(200).json(trainings);
   });
 };
+exports.upcoming = function(req, res) {
+  var now = new Date();
+  var twoWeeks = new Date();
+  twoWeeks.setDate(twoWeeks.getDate()+14);
+  Training.find({'time': {'$gte': now, '$lt': twoWeeks}}).sort('time').exec(function (err, trainings) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(trainings);
+  });
+};
 
 // Get a single training
 exports.show = function(req, res) {
@@ -55,5 +64,6 @@ exports.destroy = function(req, res) {
 };
 
 function handleError(res, err) {
+  console.log(err);
   return res.status(500).send(err);
 }

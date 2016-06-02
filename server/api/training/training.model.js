@@ -17,6 +17,19 @@ var TrainingSchema = new Schema({
         required: true,
     },
     description: String,
+    _athlete: {
+        type: Schema.Types.ObjectId,
+        ref: 'Athlete',
+        required: true
+    },
 });
+
+// Validate discipline
+TrainingSchema
+    .path('discipline')
+    .validate(function(discipline) {
+        return ['gym', 'bike', 'run', 'coffee', 'beer', 'swim'].indexOf(discipline) > -1;
+    }, "Discipline is invalid.");
+
 
 module.exports = mongoose.model('Training', TrainingSchema);
