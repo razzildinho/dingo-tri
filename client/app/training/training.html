@@ -1,3 +1,50 @@
-<div class="col-md-12">
-This is the training view.
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+    </div>
+  </div>
+  <div class="row" ng-if="isAthlete">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2>Add session</h2>
+          <form ng-submit="addActivity()" name="newSession" novalidate>
+            <div class="form-group">
+              <div class="btn-group">
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'swim' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="discipline" value="swim" type="radio"><i class="fi flaticon-swim"></i>
+                </label>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'bike' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="discipline" value="bike" type="radio"><i class="fi flaticon-bike"></i>
+                </label>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'run' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="discipline" value="run" type="radio"><i class="fi flaticon-run"></i>
+                </label>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'gym' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="discipline" value="gym" type="radio"><i class="fi flaticon-gym"></i>
+                </label>
+              </div>
+              <div class="btn-group">
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'coffee' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="discipline" value="coffee" type="radio"><i class="fi flaticon-coffee"></i>
+                </label>
+                <label style="font-size:36px;" class="btn btn-lg" ng-class="discipline == 'beer' ? 'btn-primary active' : 'btn-default'">
+                  <input ng-model="discipline" value="beer" type="radio"><i class="fi flaticon-beer"></i>
+                </label>
+              </div>
+            </div>
+            <div class="form-group" ng-class="(newSession.address.$invalid && newSession.address.$dirty) ? 'has-error' : ''">
+              <label class="control-label">Location</label>
+              <div name="address" ng-model="location" places-search></div>
+              <span ng-show="newSession.address.$invalid && newSession.address.$dirty" class="help-block">Please select address from dropdown</span>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Description</label>
+              <textarea ng-model="description" class="form-control" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

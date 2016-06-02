@@ -155,6 +155,10 @@
                 return currentAthlete.role === 'admin';
             },
 
+            isAthlete: function() {
+                return currentAthlete.role === 'admin' || currentAthlete.role === 'athlete';
+            },
+
             /**
              * Get auth token
              */

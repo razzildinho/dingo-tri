@@ -10,7 +10,7 @@ angular.module('triApp')
         data: {
             title: 'Training',
             loggedIn: true,
-            loggedOut: false,
+            loggedOut: true,
         },
       });
   });
