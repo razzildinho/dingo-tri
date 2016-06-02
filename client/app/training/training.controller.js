@@ -9,6 +9,9 @@ angular.module('triApp')
     $scope.$watch(function(){return Auth.isAdmin()}, function(isAdmin){
         $scope.isAdmin = isAdmin;
     });
+    $scope.$watch(function(){return Auth.getCurrentAthlete()}, function(athlete){
+        $scope._athlete = athlete._id;
+    });
     $scope.session = {
         discipline: 'swim',
         location: null,
@@ -37,6 +40,27 @@ angular.module('triApp')
         training.addSession(formData).then(
             function(res){
                 $scope.showForm = false;
+                training.upcoming().then(
+                    function(res){
+                        $scope.sessions = res;
+                    },
+                    function(err){
+                        console.log(err);
+                    }
+                );
+            },
+            function(err){
+                console.log(err);
+            }
+        );
+    };
+
+    $scope.deleteSession = function(session){
+        if (!(Auth.isAdmin() || Auth.getCurrentAthlete()._id == session._athlete)){
+            return;
+        }
+        training.deleteSession(session._id).then(
+            function(res){
                 training.upcoming().then(
                     function(res){
                         $scope.sessions = res;

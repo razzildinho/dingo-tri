@@ -37,6 +37,20 @@ angular.module('triApp')
 
         };
 
+        service.deleteSession = function(_id){
+
+            var deferred = $q.defer();
+
+            $http.delete('/api/training/'+_id).success(function(data){
+                deferred.resolve(data);
+            }).error(function(err){
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+
+        };
+
         return service;
 
   });

@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row">
-    <h2>{{sessions.length > 0 ? 'Upcoming sessions' : 'No upcoming sessions'}}</h2>
     <div class="col-md-12">
-      <div ng-repeat="upcoming in sessions" class="panel panel-default">
+      <h1>Upcoming sessions</h1>
+      <p ng-if="sessions.length == 0" class="text-muted">No upcoming sessions.</p>
+      <div ng-repeat="upcoming in sessions" class="panel panel-default" ng-if="['beer', 'coffee'].indexOf(upcoming.discipline) < 0 || isAthlete">
         <div class="panel-heading"><h3><i class="fi" ng-class="'flaticon-'+upcoming.discipline"></i>&nbsp;<span style="text-transform:capitalize;">{{upcoming.discipline}}</span></h3></div>
         <div class="panel-body">
           <p><i class="fa fa-calendar"></i>&nbsp;{{upcoming.time | date : 'dd/MM/yyyy HH:mm'}}</p>
           <p><a href="{{upcoming.location.url}}" target="_blank"><i class="fa fa-map-marker"></i>&nbsp;{{upcoming.location.formatted_address}}</a></p>
           <p ng-if="upcoming.description">{{upcoming.description}}</p>
         </div>
-        <div ng-if="isAdmin" class="panel-footer">
+        <div ng-if="isAdmin || upcoming._athlete == _athlete" class="panel-footer">
           <button class="btn btn-danger" ng-click="deleteSession(upcoming)">Delete</button>
         </div>
       </div>
